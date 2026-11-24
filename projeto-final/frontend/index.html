@@ -1,0 +1,1206 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="theme-color" content="#17191f" />
+<meta name="description" content="Saúde Acessível: encontre unidades, serviços e informações de saúde em Barra do Garças." />
+
+<title>Saúde Acessível — Barra do Garças</title>
+
+<link rel="stylesheet" href="css/style.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+<style id="saude-acessivel-identity">
+:root {
+  --sa-bg: #17191f;
+  --sa-panel: #20232b;
+  --sa-panel-soft: #262b35;
+  --sa-line: #343b49;
+  --sa-text: #e8edf4;
+  --sa-muted: #a6b0bf;
+  --sa-mint: #61ddc5;
+  --sa-blue: #55a9ff;
+}
+
+body {
+  background: var(--sa-bg) !important;
+  color: var(--sa-text) !important;
+}
+
+.masthead {
+  background: #151820 !important;
+  border-bottom: 1px solid var(--sa-line);
+}
+
+.masthead-top {
+  background: #1b1f28 !important;
+  color: var(--sa-muted) !important;
+}
+
+.masthead-main {
+  background: #151820 !important;
+}
+
+.brand {
+  gap: 14px;
+}
+
+.brand-seal {
+  width: 58px;
+  height: 58px;
+  flex: 0 0 58px;
+  display: grid;
+  place-items: center;
+  border-radius: 17px !important;
+  background: linear-gradient(145deg,#243b48,#1d2c42) !important;
+  border: 1px solid #426477 !important;
+  box-shadow: 0 0 0 5px #61ddc510, 0 9px 26px #0005;
+}
+
+.brand-seal svg {
+  width: 47px;
+  height: 47px;
+  display: block;
+}
+
+.brand h1 {
+  color: #f4f8fc !important;
+  letter-spacing: -.045em;
+}
+
+.brand span {
+  color: #aebbc9 !important;
+}
+
+.nav-main,
+.mobile-nav {
+  background: #1b1f28 !important;
+  border-color: var(--sa-line) !important;
+}
+
+.nav-link {
+  color: #b9c4d2 !important;
+  border-radius: 8px;
+}
+
+.nav-link:hover,
+.nav-link.active {
+  color: #f5fbff !important;
+  background: #293442 !important;
+}
+
+.nav-link.active {
+  box-shadow: inset 0 -2px var(--sa-mint);
+}
+
+.stats-strip {
+  background: #202630 !important;
+  border-bottom: 1px solid var(--sa-line);
+  color: var(--sa-muted) !important;
+}
+
+.stats-strip strong {
+  color: var(--sa-mint) !important;
+}
+
+.main-content {
+  color: var(--sa-text);
+}
+
+h1,h2,h3,h4,strong {
+  color: #eaf0f7;
+}
+
+.eyebrow {
+  color: var(--sa-mint) !important;
+  letter-spacing: .12em;
+  font-weight: 800;
+}
+
+.search-bar,
+.index-item,
+.board,
+.aviso,
+.posto-card,
+.campanha-card,
+.prof-card,
+.calendario-wrap,
+.mapa-placeholder,
+.historico-wrap,
+.cal-vacinal,
+.modal,
+.ia-panel {
+  background: var(--sa-panel) !important;
+  color: var(--sa-text) !important;
+  border: 1px solid var(--sa-line) !important;
+  border-radius: 13px !important;
+  box-shadow: 0 12px 28px #0002;
+}
+
+.index-item {
+  transition: transform .2s ease,
+              border-color .2s ease,
+              background .2s ease;
+}
+
+.index-item:hover {
+  transform: translateY(-3px);
+  background: #262d38 !important;
+  border-color: #4b9fbd !important;
+}
+
+.index-num,
+.index-arrow {
+  color: var(--sa-mint) !important;
+}
+
+.index-icon,
+.ph-icon {
+  background: #203b3c !important;
+  color: var(--sa-mint) !important;
+  border-radius: 10px;
+}
+
+input {
+  background: #171b23 !important;
+  color: var(--sa-text) !important;
+  border-color: var(--sa-line) !important;
+}
+
+input::placeholder {
+  color: #8793a3 !important;
+}
+
+.btn-search,
+.filter-btn.active,
+.vtab.active,
+.esp-btn.active,
+#iaSend {
+  background: linear-gradient(135deg,#319d99,#327fc5) !important;
+  color: white !important;
+  border-color: transparent !important;
+}
+
+.filter-btn,
+.vtab,
+.esp-btn,
+.cal-nav button {
+  background: var(--sa-panel-soft) !important;
+  color: var(--sa-text) !important;
+  border: 1px solid var(--sa-line) !important;
+}
+
+.site-footer {
+  background: #151820 !important;
+  border-top: 1px solid var(--sa-line);
+  color: var(--sa-muted) !important;
+}
+
+.ia-fab {
+  background: linear-gradient(135deg,#319d99,#327fc5) !important;
+}
+
+.toast {
+  background: var(--sa-panel) !important;
+  color: var(--sa-text) !important;
+  border: 1px solid var(--sa-line);
+}
+
+/* Apresentação de boas-vindas com identidade própria */
+
+.welcome-banner {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 28px;
+  min-height: 255px;
+  margin: 8px 0 30px;
+  padding: 34px 38px;
+  border: 1px solid #36515c;
+  border-radius: 18px;
+
+  background:
+    radial-gradient(ellipse at 85% 35%,#24505a 0%,transparent 37%),
+    linear-gradient(115deg,#202d36 0%,#202a39 58%,#1b3440 100%);
+
+  box-shadow: 0 18px 42px #0003;
+}
+
+.welcome-copy {
+  position: relative;
+  z-index: 2;
+  max-width: 650px;
+}
+
+.welcome-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--sa-mint);
+  font-size: .72rem;
+  font-weight: 800;
+  letter-spacing: .15em;
+}
+
+.welcome-copy h2 {
+  margin: 13px 0 10px;
+  color: #f4f8fc;
+  font-size: clamp(1.8rem,4vw,2.65rem);
+  line-height: 1.12;
+  letter-spacing: -.045em;
+}
+
+.welcome-copy h2 em {
+  color: var(--sa-mint);
+  font-style: normal;
+}
+
+.welcome-copy p {
+  max-width: 560px;
+  color: #b9c8d5;
+  line-height: 1.7;
+  margin: 0;
+}
+
+.welcome-actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 18px;
+  margin-top: 23px;
+}
+
+.welcome-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  padding: 11px 16px;
+  border-radius: 9px;
+  background: var(--sa-mint);
+  color: #10282b !important;
+  font-weight: 800;
+  text-decoration: none;
+  transition: transform .2s,filter .2s;
+}
+
+.welcome-button:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.08);
+}
+
+.welcome-note {
+  color: #b8c9d2;
+  font-size: .78rem;
+}
+
+.welcome-note i {
+  color: var(--sa-mint);
+  margin-right: 5px;
+}
+
+/* Ilustração do banner */
+
+.welcome-art {
+  position: relative;
+  width: 220px;
+  height: 190px;
+  flex: 0 0 220px;
+  display: grid;
+  place-items: center;
+}
+
+.art-orbit {
+  position: absolute;
+  border: 1px solid #70dcca55;
+  border-radius: 50%;
+  transform: rotate(-25deg);
+}
+
+.orbit-one {
+  width: 190px;
+  height: 125px;
+}
+
+.orbit-two {
+  width: 145px;
+  height: 185px;
+  transform: rotate(35deg);
+  border-color: #55a9ff55;
+}
+
+.art-symbol {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  width: 125px;
+  height: 125px;
+  border-radius: 35px;
+  background: linear-gradient(145deg,#244a53,#243a56);
+  border: 1px solid #5bd9c577;
+  box-shadow: 0 12px 40px #0005,0 0 35px #61ddc522;
+  transform: rotate(-6deg);
+}
+
+.art-symbol svg {
+  width: 105px;
+  height: 105px;
+}
+
+.art-caption {
+  position: absolute;
+  bottom: 0;
+  color: #8caeb7;
+  font-size: .58rem;
+  font-weight: 800;
+  letter-spacing: .18em;
+  white-space: nowrap;
+}
+
+/* Responsividade */
+
+@media (max-width: 700px) {
+  .welcome-banner {
+    padding: 25px 22px;
+    min-height: auto;
+  }
+
+  .welcome-art {
+    display: none;
+  }
+
+  .brand-seal {
+    width: 49px;
+    height: 49px;
+    flex-basis: 49px;
+    border-radius: 14px !important;
+  }
+
+  .brand-seal svg {
+    width: 41px;
+    height: 41px;
+  }
+}
+</style>
+
+</head>
+
+<body>
+
+<!-- CABEÇALHO -->
+
+<header class="masthead">
+
+  <div class="masthead-top">
+
+    <span class="edicao" id="edicaoData">Carregando data...</span>
+
+    <span>Barra do Garças · MT · Secretaria Municipal de Saúde</span>
+
+  </div>
+
+  <div class="masthead-main">
+
+    <div class="brand">
+
+      <!-- SÍMBOLO PERSONALIZADO -->
+
+      <div class="brand-seal" role="img" aria-label="Símbolo Saúde Acessível">
+
+        <svg viewBox="0 0 64 64" aria-hidden="true" focusable="false">
+
+          <defs>
+            <linearGradient id="saudeGradient" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="#65e6cf"/>
+              <stop offset="100%" stop-color="#3794ff"/>
+            </linearGradient>
+          </defs>
+
+          <path
+            d="M32 5 52 13v16c0 13.2-8.2 23.7-20 30C20.2 52.7 12 42.2 12 29V13L32 5Z"
+            fill="none"
+            stroke="url(#saudeGradient)"
+            stroke-width="3.2"
+            stroke-linejoin="round"
+          />
+
+          <path
+            d="M27 18h10v9h9v10h-9v9H27v-9h-9V27h9z"
+            fill="url(#saudeGradient)"
+            stroke="#dffcf7"
+            stroke-width="1.2"
+            stroke-linejoin="round"
+          />
+
+          <path
+            d="m18 14 14-5 14 5"
+            fill="none"
+            stroke="#dffcf7"
+            stroke-width="1.4"
+            opacity=".7"
+          />
+
+        </svg>
+
+      </div>
+
+      <div>
+
+        <h1>Saúde Acessível</h1>
+
+        <span>Informação que cuida. Saúde perto de você.</span>
+
+      </div>
+
+    </div>
+
+    <div class="masthead-user">
+
+      <a href="#" class="btn-sair">Sair</a>
+
+    </div>
+
+    <button class="hamburger" id="hamburger">
+      <i class="fas fa-bars"></i>
+    </button>
+
+  </div>
+
+  <!-- MENU PRINCIPAL -->
+
+  <nav class="nav-main">
+
+    <a href="#" class="nav-link active" data-page="home">
+      <i class="fas fa-house"></i> Início
+    </a>
+
+    <a href="#" class="nav-link" data-page="postos">
+      <i class="fas fa-map-location-dot"></i> Postos
+    </a>
+
+    <a href="#" class="nav-link" data-page="vacinacao">
+      <i class="fas fa-syringe"></i> Vacinação
+    </a>
+
+    <a href="#" class="nav-link" data-page="profissionais">
+      <i class="fas fa-user-doctor"></i> Profissionais
+    </a>
+
+    <a href="#" class="nav-link" data-page="calendario">
+      <i class="fas fa-calendar-days"></i> Calendário
+    </a>
+
+  </nav>
+
+</header>
+
+<!-- MENU PARA CELULAR -->
+
+<div class="mobile-nav" id="mobileNav">
+
+  <a href="#" class="nav-link active" data-page="home">
+    <i class="fas fa-house"></i> Início
+  </a>
+
+  <a href="#" class="nav-link" data-page="postos">
+    <i class="fas fa-map-location-dot"></i> Postos Próximos
+  </a>
+
+  <a href="#" class="nav-link" data-page="vacinacao">
+    <i class="fas fa-syringe"></i> Vacinação
+  </a>
+
+  <a href="#" class="nav-link" data-page="profissionais">
+    <i class="fas fa-user-doctor"></i> Profissionais
+  </a>
+
+  <a href="#" class="nav-link" data-page="calendario">
+    <i class="fas fa-calendar-days"></i> Calendário
+  </a>
+
+</div>
+
+<!-- INDICADORES -->
+
+<div class="stats-strip">
+
+  <div class="stats-strip-inner">
+
+    <span>
+      <strong id="statPostos">–</strong>
+      unidades em funcionamento
+    </span>
+
+    <span>
+      <strong id="statCampanhas">–</strong>
+      campanhas de vacinação ativas
+    </span>
+
+    <span>
+      <strong id="statProfissionais">–</strong>
+      profissionais disponíveis agora
+    </span>
+
+  </div>
+
+</div>
+
+<!-- CONTEÚDO PRINCIPAL -->
+
+<main class="main-content">
+
+  <!-- PÁGINA INICIAL -->
+
+  <section class="page active" id="page-home">
+
+    <!-- BANNER PERSONALIZADO -->
+
+    <div class="welcome-banner">
+
+      <div class="welcome-copy">
+
+        <span class="welcome-kicker">
+          <i class="fas fa-heart-pulse"></i>
+          CUIDADO MAIS PERTO
+        </span>
+
+        <h2>
+          Saúde de um jeito
+          <em>simples e acessível.</em>
+        </h2>
+
+        <p>
+          Encontre unidades, acompanhe campanhas e descubra os serviços
+          de saúde disponíveis em Barra do Garças.
+        </p>
+
+        <div class="welcome-actions">
+
+          <a href="#" class="welcome-button" data-page="postos">
+            <i class="fas fa-location-dot"></i>
+            Encontrar uma unidade
+          </a>
+
+          <span class="welcome-note">
+            <i class="fas fa-shield-heart"></i>
+            Informação para cuidar melhor de você
+          </span>
+
+        </div>
+
+      </div>
+
+      <!-- ILUSTRAÇÃO -->
+
+      <div class="welcome-art" aria-hidden="true">
+
+        <div class="art-orbit orbit-one"></div>
+        <div class="art-orbit orbit-two"></div>
+
+        <div class="art-symbol">
+
+          <svg viewBox="0 0 120 120">
+
+            <path
+              d="M60 12 96 26v28c0 23-14 41-36 54C38 95 24 77 24 54V26L60 12Z"
+              fill="#1e3440"
+              stroke="#5bd9c5"
+              stroke-width="3"
+            />
+
+            <path
+              d="M52 34h16v17h17v16H68v17H52V67H35V51h17z"
+              fill="#61ddc5"
+            />
+
+          </svg>
+
+        </div>
+
+        <span class="art-caption">
+          SAÚDE • ACESSO • CUIDADO
+        </span>
+
+      </div>
+
+    </div>
+
+    <!-- BUSCA -->
+
+    <div class="search-bar-wrap">
+
+      <div class="search-bar">
+
+        <input
+          type="text"
+          placeholder="Buscar serviço ou especialidade..."
+          id="searchInput"
+        />
+
+        <button class="btn-search">
+          <i class="fas fa-search"></i>
+        </button>
+
+      </div>
+
+      <div class="search-results" id="searchResults"></div>
+
+    </div>
+
+    <!-- GRADE DA PÁGINA INICIAL -->
+
+    <div class="home-grid">
+
+      <div>
+
+        <div class="eyebrow">Índice de serviços</div>
+
+        <div class="index-list" style="margin-top:14px">
+
+          <div class="index-item" data-target="postos">
+
+            <span class="index-num">01</span>
+
+            <span class="index-icon">
+              <i class="fas fa-map-location-dot"></i>
+            </span>
+
+            <div class="index-body">
+              <h3>Postos Próximos</h3>
+              <p>Unidades de saúde perto de você, com endereço e horário.</p>
+            </div>
+
+            <i class="fas fa-arrow-right index-arrow"></i>
+
+          </div>
+
+          <div class="index-item" data-target="vacinacao">
+
+            <span class="index-num">02</span>
+
+            <span class="index-icon">
+              <i class="fas fa-syringe"></i>
+            </span>
+
+            <div class="index-body">
+              <h3>Vacinação</h3>
+              <p>Campanhas ativas, calendário vacinal e seu histórico.</p>
+            </div>
+
+            <i class="fas fa-arrow-right index-arrow"></i>
+
+          </div>
+
+          <div class="index-item" data-target="profissionais">
+
+            <span class="index-num">03</span>
+
+            <span class="index-icon">
+              <i class="fas fa-user-doctor"></i>
+            </span>
+
+            <div class="index-body">
+              <h3>Profissionais Hoje</h3>
+              <p>Médicos e horários de atendimento por especialidade.</p>
+            </div>
+
+            <i class="fas fa-arrow-right index-arrow"></i>
+
+          </div>
+
+          <div class="index-item" data-target="calendario">
+
+            <span class="index-num">04</span>
+
+            <span class="index-icon">
+              <i class="fas fa-calendar-days"></i>
+            </span>
+
+            <div class="index-body">
+              <h3>Calendário da Saúde</h3>
+              <p>Eventos, feriados e campanhas do ano.</p>
+            </div>
+
+            <i class="fas fa-arrow-right index-arrow"></i>
+
+          </div>
+
+        </div>
+
+        <!-- AVISOS -->
+
+        <div class="avisos-section" style="margin-top:32px">
+
+          <h2>Avisos Importantes</h2>
+
+          <div class="aviso-list">
+
+            <div class="aviso success">
+              <span class="a-mark"></span>
+              <span>
+                <strong>Campanha Gripe 2026 em andamento</strong>
+                <span class="body-text">
+                  14/04–30/05. Prioritários: idosos 60+, gestantes
+                  e crianças até 6 anos. Procure seu posto.
+                </span>
+              </span>
+            </div>
+
+            <div class="aviso warn">
+              <span class="a-mark"></span>
+              <span>
+                <strong>Campanha Dengue 2026 ativa</strong>
+                <span class="body-text">
+                  Vacina Qdenga para crianças e adolescentes de 6 a 16 anos.
+                  Disponível nas UBS.
+                </span>
+              </span>
+            </div>
+
+            <div class="aviso info">
+              <span class="a-mark"></span>
+              <span>
+                <strong>CEM é atendimento por encaminhamento</strong>
+                <span class="body-text">
+                  Só é possível ser atendido no CEM com encaminhamento
+                  das UBS de Barra do Garças.
+                </span>
+              </span>
+            </div>
+
+            <div class="aviso success">
+              <span class="a-mark"></span>
+              <span>
+                <strong>Multivacinação Infantil 2026</strong>
+                <span class="body-text">
+                  08/06 a 26/06 — atualize o cartão vacinal de crianças
+                  de 0–5 anos em qualquer UBS.
+                </span>
+              </span>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- QUADRO DE HORÁRIOS -->
+
+      <aside class="board">
+
+        <h3>
+          <i class="fas fa-clock"></i>
+          Quadro de Horários
+        </h3>
+
+        <div class="board-clock" id="boardClock">
+          Atualizando...
+        </div>
+
+        <ul class="board-list">
+
+          <li>
+            <span class="b-tag">8h–12h</span>
+            <div>
+              <strong>Dentista</strong>
+              <span>UBS Centro</span>
+            </div>
+          </li>
+
+          <li>
+            <span class="b-tag">13h–17h</span>
+            <div>
+              <strong>Clínico Geral</strong>
+              <span>UBS Centro</span>
+            </div>
+          </li>
+
+          <li>
+            <span class="b-tag">14h–18h</span>
+            <div>
+              <strong>Pediatra</strong>
+              <span>UBS Jd. Bandeirantes</span>
+            </div>
+          </li>
+
+          <li>
+            <span class="b-tag">9h–12h</span>
+            <div>
+              <strong>Cardiologista</strong>
+              <span>CEM</span>
+            </div>
+          </li>
+
+        </ul>
+
+      </aside>
+
+    </div>
+
+  </section>
+
+  <!-- PÁGINA DE POSTOS -->
+
+  <section class="page" id="page-postos">
+
+    <div class="page-header">
+
+      <h1>
+        <span class="ph-icon">
+          <i class="fas fa-map-location-dot"></i>
+        </span>
+        Postos de Saúde Próximos
+      </h1>
+
+      <p>
+        Encontre a unidade mais perto de você e confira os serviços,
+        horários e tempo de espera estimado.
+      </p>
+
+    </div>
+
+    <div class="filter-bar">
+
+      <button class="filter-btn active" data-filter="all">
+        Todos
+      </button>
+
+      <button class="filter-btn" data-filter="aberto">
+        Aberto Agora
+      </button>
+
+      <button class="filter-btn" data-filter="fechado">
+        Fechado
+      </button>
+
+      <button class="filter-btn" data-filter="urgencia">
+        Urgência 24h
+      </button>
+
+    </div>
+
+    <div class="postos-grid" id="postosGrid"></div>
+
+    <div class="mapa-placeholder">
+
+      <i class="fas fa-map"></i>
+
+      <span>
+        Mapa interativo indisponível nesta versão demo —
+        use o botão "Rota" para abrir no Google Maps.
+      </span>
+
+    </div>
+
+  </section>
+
+  <!-- PÁGINA DE VACINAÇÃO -->
+
+  <section class="page" id="page-vacinacao">
+
+    <div class="page-header">
+
+      <h1>
+        <span class="ph-icon">
+          <i class="fas fa-syringe"></i>
+        </span>
+        Vacinação
+      </h1>
+
+      <p>
+        Campanhas ativas, calendário vacinal completo e disponibilidade por posto.
+      </p>
+
+    </div>
+
+    <div class="vacina-tabs">
+
+      <button class="vtab active" data-vtab="campanhas">
+        Campanhas Ativas
+      </button>
+
+      <button class="vtab" data-vtab="calendario-vacinal">
+        Calendário Vacinal
+      </button>
+
+      <button class="vtab" data-vtab="meu-historico">
+        Meu Histórico
+      </button>
+
+    </div>
+
+    <div class="vtab-content active" id="vtab-campanhas">
+      <div class="campanhas-grid" id="campanhasGrid"></div>
+    </div>
+
+    <div class="vtab-content" id="vtab-calendario-vacinal">
+      <div class="cal-vacinal" id="calVacinal"></div>
+    </div>
+
+    <div class="vtab-content" id="vtab-meu-historico">
+      <div class="historico-wrap" id="historicoCards"></div>
+    </div>
+
+  </section>
+
+  <!-- PÁGINA DE PROFISSIONAIS -->
+
+  <section class="page" id="page-profissionais">
+
+    <div class="page-header">
+
+      <h1>
+        <span class="ph-icon">
+          <i class="fas fa-user-doctor"></i>
+        </span>
+        Profissionais de Saúde
+      </h1>
+
+      <p>
+        Equipe disponível hoje e seus horários de atendimento por unidade.
+      </p>
+
+    </div>
+
+    <div class="esp-filter">
+
+      <button class="esp-btn active" data-esp="todos">
+        Todos
+      </button>
+
+      <button class="esp-btn" data-esp="clinico">
+        Clínico Geral
+      </button>
+
+      <button class="esp-btn" data-esp="pediatra">
+        Pediatria
+      </button>
+
+      <button class="esp-btn" data-esp="dentista">
+        Odontologia
+      </button>
+
+      <button class="esp-btn" data-esp="cardio">
+        Cardiologia
+      </button>
+
+      <button class="esp-btn" data-esp="gineco">
+        Ginecologia
+      </button>
+
+    </div>
+
+    <div class="prof-grid" id="profGrid"></div>
+
+  </section>
+
+  <!-- PÁGINA DE CALENDÁRIO -->
+
+  <section class="page" id="page-calendario">
+
+    <div class="page-header">
+
+      <h1>
+        <span class="ph-icon">
+          <i class="fas fa-calendar-days"></i>
+        </span>
+        Calendário da Saúde
+      </h1>
+
+      <p>
+        Eventos, campanhas, feriados e datas importantes do ano.
+      </p>
+
+    </div>
+
+    <div class="calendario-wrap">
+
+      <div class="cal-nav">
+
+        <button id="prevMonth">
+          <i class="fas fa-chevron-left"></i>
+        </button>
+
+        <h2 id="calTitle"></h2>
+
+        <button id="nextMonth">
+          <i class="fas fa-chevron-right"></i>
+        </button>
+
+      </div>
+
+      <div class="cal-grid" id="calGrid"></div>
+
+      <div class="cal-legend">
+
+        <span>
+          <i class="fas fa-circle" style="color:#1f5c3f"></i>
+          Campanha
+        </span>
+
+        <span>
+          <i class="fas fa-circle" style="color:#b97f24"></i>
+          Feriado
+        </span>
+
+        <span>
+          <i class="fas fa-circle" style="color:#2c5d73"></i>
+          Evento
+        </span>
+
+      </div>
+
+      <div class="cal-events" id="calEvents"></div>
+
+    </div>
+
+  </section>
+
+</main>
+
+<!-- RODAPÉ -->
+
+<footer class="site-footer">
+
+  <div class="footer-inner">
+
+    <div class="footer-col">
+
+      <h4>Saúde Acessível</h4>
+
+      <p>
+        Guia público e gratuito das unidades de saúde de Barra do Garças/MT.
+        Dados de horários e disponibilidade têm caráter informativo —
+        confirme sempre com a unidade.
+      </p>
+
+    </div>
+
+    <div class="footer-col">
+
+      <h4>Contatos de Emergência</h4>
+
+      <div class="footer-emergency">
+
+        <span><strong>SAMU</strong> — 192</span>
+        <span><strong>Bombeiros</strong> — 193</span>
+        <span><strong>Disque Saúde</strong> — 136</span>
+
+      </div>
+
+    </div>
+
+    <div class="footer-col">
+
+      <h4>Navegação</h4>
+
+      <a href="#" class="nav-link" data-page="postos" style="padding:2px 0">
+        Postos de Saúde
+      </a>
+
+      <a href="#" class="nav-link" data-page="vacinacao" style="padding:2px 0">
+        Vacinação
+      </a>
+
+      <a href="#" class="nav-link" data-page="profissionais" style="padding:2px 0">
+        Profissionais
+      </a>
+
+      <a href="#" class="nav-link" data-page="calendario" style="padding:2px 0">
+        Calendário
+      </a>
+
+    </div>
+
+  </div>
+
+  <div class="footer-bottom">
+    Secretaria Municipal de Saúde — Barra do Garças/MT ·
+    Projeto demonstrativo, sem vínculo oficial.
+  </div>
+
+</footer>
+
+<!-- MODAL -->
+
+<div class="modal-overlay" id="modalOverlay">
+
+  <div class="modal" id="postoModal">
+
+    <button class="modal-close" id="modalClose">
+      <i class="fas fa-times"></i>
+    </button>
+
+    <div id="modalContent"></div>
+
+  </div>
+
+</div>
+
+<!-- NOTIFICAÇÃO TOAST -->
+
+<div class="toast" id="toast"></div>
+
+<!-- ATENDENTE VIRTUAL -->
+
+<button class="ia-fab" id="iaFab" title="Atendente Virtual">
+  <i class="fas fa-comment-medical"></i>
+</button>
+
+<div class="ia-panel" id="iaPanel">
+
+  <div class="ia-header">
+
+    <div class="ia-icon">
+      <i class="fas fa-comment-medical"></i>
+    </div>
+
+    <div>
+      <h4>Atendente Virtual</h4>
+      <span>Tira dúvidas sobre saúde local</span>
+    </div>
+
+    <button class="ia-close" id="iaClose">
+      <i class="fas fa-times"></i>
+    </button>
+
+  </div>
+
+  <div class="ia-messages" id="iaMessages"></div>
+
+  <div class="ia-chips" id="iaChips"></div>
+
+  <div class="ia-input-row">
+
+    <input
+      type="text"
+      id="iaInput"
+      placeholder="Pergunte algo, ex: dentista hoje..."
+    />
+
+    <button id="iaSend">
+      <i class="fas fa-paper-plane"></i>
+    </button>
+
+  </div>
+
+  <div class="ia-disclaimer">
+    Atendente local baseado nos dados do app —
+    não substitui orientação médica.
+  </div>
+
+</div>
+
+<!-- ARQUIVOS JAVASCRIPT -->
+
+<script src="js/data.js"></script>
+<script src="js/app.js"></script>
+
+</body>
+</html>
